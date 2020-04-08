@@ -1,0 +1,32 @@
+$main_text_color: #000000;
+$main_background_color: #f0f0e6;
+$nav_color: #133c7d;
+
+body, html {
+    background-color: $main_background_color;
+}
+
+.MyText {
+    font-family: 'Times New Roman', Times, serif;
+    color: $main_text_color;
+}
+
+.MyNav {
+    @extend .MyText;
+    background-color: $nav_color;
+    box-shadow: 0px 5px 10px black;
+    color: $main_text_color;
+}
+
+
+
+.MyBrand {
+    @extend .MyText;
+    color: goldenrod;
+    padding: 5px;
+}
+
+.MainAppDiv {
+    margin-left: 10px;
+    padding: 10px;
+}
