@@ -14,7 +14,7 @@ body, html {
 .MyNav {
     @extend .MyText;
     background-color: $nav_color;
-    box-shadow: 0px 5px 10px black;
+    box-shadow: 0px 5px 15px 5px black;
     color: $main_text_color;
 }
 
@@ -24,9 +24,28 @@ body, html {
     @extend .MyText;
     color: goldenrod;
     padding: 5px;
+    font-size: 40px;
+    text-shadow: 0px 4px 10px black;
+}
+
+.MyBrand:hover {
+    color: goldenrod;
+    text-decoration: none;
 }
 
 .MainAppDiv {
     margin-left: 10px;
     padding: 10px;
+}
+
+.MyNavLinks {
+    color: goldenrod;
+    text-shadow: 0px 4px 10px black;
+    font-size: larger;
+    padding: 10px;
+}
+
+.MyNavLinks:hover {
+    color: goldenrod;
+    text-decoration: none;
 }

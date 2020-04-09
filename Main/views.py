@@ -5,3 +5,10 @@ from django.shortcuts import render
 
 def index(reqeust):
     return render(reqeust, 'index.html')
+
+
+def register(request):
+    return render(request, 'register.html')
+
+def login(request):
+    return render(request, 'login.html')

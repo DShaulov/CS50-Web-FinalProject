@@ -9,18 +9,37 @@ body, html {
 
 .MyNav {
   background-color: #133c7d;
-  box-shadow: 0px 5px 10px black;
+  box-shadow: 0px 5px 15px 5px black;
   color: #000000;
 }
 
 .MyBrand {
   color: goldenrod;
   padding: 5px;
+  font-size: 40px;
+  text-shadow: 0px 4px 10px black;
+}
+
+.MyBrand:hover {
+  color: goldenrod;
+  text-decoration: none;
 }
 
 .MainAppDiv {
   margin-left: 10px;
   padding: 10px;
+}
+
+.MyNavLinks {
+  color: goldenrod;
+  text-shadow: 0px 4px 10px black;
+  font-size: larger;
+  padding: 10px;
+}
+
+.MyNavLinks:hover {
+  color: goldenrod;
+  text-decoration: none;
 }
 
 /*# sourceMappingURL=styles.css.map */
