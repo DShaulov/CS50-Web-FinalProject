@@ -13,13 +13,17 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     </head>
     <body>
-        <nav class="MyNav">
-            <a href="/" class="MyBrand col-1">Valdivian</a>
-            <a href="/login" class="MyNavLinks col-1 offset-10">Login</a>
-            <a href="/register" class="MyNavLinks">Register</a>
+        <nav class="MyNav col-12">
+            <div>
+                <a href="/" class="MyBrand">Valdivian</a>
+                <a href="/login" class="MyNavLinks">Login</a>
+                <a href="/register" class="MyNavLinks">Register</a>
+            </div>
         </nav>
-        <div class="MainAppDiv col-12"></div>
+        <br>
         {% block body %}
+            <div class="MainAppDiv col-12"></div>
+        
 
         {% endblock %}
         </div>

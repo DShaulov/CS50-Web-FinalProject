@@ -4,6 +4,7 @@ $nav_color: #133c7d;
 
 body, html {
     background-color: $main_background_color;
+    overflow-x: hidden;
 }
 
 .MyText {
@@ -39,10 +40,13 @@ body, html {
 }
 
 .MyNavLinks {
+    @extend .MyText;
     color: goldenrod;
     text-shadow: 0px 4px 10px black;
     font-size: larger;
     padding: 10px;
+    float: right;
+    margin: 10px;
 }
 
 .MyNavLinks:hover {

@@ -8,7 +8,15 @@ def index(reqeust):
 
 
 def register(request):
-    return render(request, 'register.html')
+    if request.method == "GET":
+        return render(request, 'register.html')
+
+    if request.method == "POST":
+        username = request.form.get('email')
+        first_name = request.form.get('first_name')
+        last_name = request.form.get('last_name')
+        password = request.form.get('password')
 
 def login(request):
     return render(request, 'login.html')
+

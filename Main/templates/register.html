@@ -1,9 +1,26 @@
 {% extends 'layout.html' %}
+{% load static %}
 
 {% block title %}
     <title>Register</title>
+    <script src="{% static 'scripts/checkInputs.js' %}"></script>
 {% endblock %}
 
 {% block body %}
-    
+    <div class="col-8 offset-2">
+        <form onsubmit="return checkInputs()" action="/register" method="POST">
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" class="form-control" autocomplete="off" name="first_name">
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" class="form-control" autocomplete="off" name="last_name">
+            <label for="email">Email:</label>
+            <input type="text" id="email" class="form-control" autocomplete="off" name="email">
+            <label for="password">Password:</label>
+            <input type="password" id="password" class="form-control" autocomplete="off" name="password">
+            <label for="password_again">Password (again):</label>
+            <input type="password" id="password_again" class="form-control" autocomplete="off" name="password_again">
+            <br>
+            <input type="submit" class="form-control" value="Register">
+        </form>
+    </div>
 {% endblock %}
