@@ -1,9 +1,25 @@
 {% extends 'layout.html' %}
 
 {% block title %}
+    {% load static %}
     <title>Login</title>
+    <script src="{% static 'scripts/checkInputs.js' %}"></script>
 {% endblock %}
 
 {% block body %}
-    
+    <br>
+    <div class="form-background-border col-4 offset-4">
+        <form onsubmit="return checkInputs()" action="/register" method="POST">
+            <br>
+            <label for="email" class="form-label">Email:</label>
+            <input type="text" class="form-control" autocomplete="off" name="email">
+            <label for="password" class="form-label">Password:</label>
+            <input type="password" id="password" class="form-control" autocomplete="off" name="password">
+            {% csrf_token %}
+            <br>
+            <input type="submit" value="Login" class="form-button col-2 offset-5"> 
+        </form>
+        <br>
+    </div>
+    <br>
 {% endblock %}

@@ -1,47 +1,49 @@
 $main_text_color: #000000;
 $main_background_color: #f0f0e6;
-$nav_color: #133c7d;
+$navbar_color: #133c7d;
+$brand_color: #FFFF33;
+
 
 body, html {
     background-color: $main_background_color;
     overflow-x: hidden;
 }
 
-.MyText {
+.my-text {
     font-family: 'Times New Roman', Times, serif;
     color: $main_text_color;
 }
 
-.MyNav {
-    @extend .MyText;
-    background-color: $nav_color;
+.my-nav {
+    @extend .my-text;
+    background-color: $navbar_color;
     box-shadow: 0px 5px 15px 5px black;
     color: $main_text_color;
 }
 
 
 
-.MyBrand {
-    @extend .MyText;
-    color: goldenrod;
+.my-brand {
+    @extend .my-text;
+    color: $brand_color;
     padding: 5px;
     font-size: 40px;
     text-shadow: 0px 4px 10px black;
 }
 
-.MyBrand:hover {
-    color: goldenrod;
+.my-brand:hover {
+    color: $brand_color;
     text-decoration: none;
 }
 
-.MainAppDiv {
+.main-app-div {
     margin-left: 10px;
     padding: 10px;
 }
 
-.MyNavLinks {
-    @extend .MyText;
-    color: goldenrod;
+.my-nav-links {
+    @extend .my-text;
+    color: $brand_color;
     text-shadow: 0px 4px 10px black;
     font-size: larger;
     padding: 10px;
@@ -49,7 +51,35 @@ body, html {
     margin: 10px;
 }
 
-.MyNavLinks:hover {
-    color: goldenrod;
+.my-nav-links:hover {
+    color: $brand_color;
     text-decoration: none;
+}
+
+.error-message {
+    text-align: center;
+    color: red;
+}
+
+.form-button {
+    @extend .my-text;
+    text-align: center;
+    background-color: $navbar_color;
+    color: $brand_color;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.form-background-border {
+    border: solid grey 2px;
+    box-shadow: 0px 0px 10px 0px grey;
+    border-radius: 5px;
+}
+
+.form-label {
+    @extend .my-text;
+}
+
+input {
+    @extend .my-text;
 }

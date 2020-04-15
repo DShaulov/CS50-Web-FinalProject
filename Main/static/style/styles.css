@@ -3,36 +3,36 @@ body, html {
   overflow-x: hidden;
 }
 
-.MyText, .MyNavLinks, .MyBrand, .MyNav {
+.my-text, input, .form-label, .form-button, .my-nav-links, .my-brand, .my-nav {
   font-family: "Times New Roman", Times, serif;
   color: #000000;
 }
 
-.MyNav {
+.my-nav {
   background-color: #133c7d;
   box-shadow: 0px 5px 15px 5px black;
   color: #000000;
 }
 
-.MyBrand {
-  color: goldenrod;
+.my-brand {
+  color: #FFFF33;
   padding: 5px;
   font-size: 40px;
   text-shadow: 0px 4px 10px black;
 }
 
-.MyBrand:hover {
-  color: goldenrod;
+.my-brand:hover {
+  color: #FFFF33;
   text-decoration: none;
 }
 
-.MainAppDiv {
+.main-app-div {
   margin-left: 10px;
   padding: 10px;
 }
 
-.MyNavLinks {
-  color: goldenrod;
+.my-nav-links {
+  color: #FFFF33;
   text-shadow: 0px 4px 10px black;
   font-size: larger;
   padding: 10px;
@@ -40,9 +40,28 @@ body, html {
   margin: 10px;
 }
 
-.MyNavLinks:hover {
-  color: goldenrod;
+.my-nav-links:hover {
+  color: #FFFF33;
   text-decoration: none;
+}
+
+.error-message {
+  text-align: center;
+  color: red;
+}
+
+.form-button {
+  text-align: center;
+  background-color: #133c7d;
+  color: #FFFF33;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.form-background-border {
+  border: solid grey 2px;
+  box-shadow: 0px 0px 10px 0px grey;
+  border-radius: 5px;
 }
 
 /*# sourceMappingURL=styles.css.map */
