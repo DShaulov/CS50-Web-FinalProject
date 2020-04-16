@@ -3,8 +3,8 @@
 
 {% block title %}
     <title>Register</title>
-    <script src="{% static 'scripts/checkInputs.js' %}"></script>
-    <script src="{% static 'scripts/checkRegisterRestrictions.js' %}"></script>
+    <script src="{% static 'scripts/check-inputs.js' %}"></script>
+    <script src="{% static 'scripts/check-register-restrictions.js' %}"></script>
 {% endblock %}
 
 {% block body %}
@@ -25,10 +25,11 @@
             <input type="password" id="password_again" class="form-control" autocomplete="off" name="password_again">
             <br>
             {% csrf_token %}
-            <button onclick="checkRegisterRestrictions()" class="form-button col-2 offset-5">Register</button>
-            <br>
-            <br>
+            
         </form>
+        <button onclick="checkRegisterRestrictions()" class="form-button col-2 offset-5">Register</button>
+        <br>
+        <br>
     </div>
     <br>
 {% endblock %}

@@ -21,4 +21,6 @@ urlpatterns = [
     path('', include('Main.urls')),
     path('register', include('Main.urls')),
     path('login', include('Main.urls')),
+    path('check_if_user_exists', include('Main.urls')),
+    path('logout', include('Main.urls'))
 ]

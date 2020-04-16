@@ -3,13 +3,13 @@
 {% block title %}
     {% load static %}
     <title>Login</title>
-    <script src="{% static 'scripts/checkInputs.js' %}"></script>
+    <script src="{% static 'scripts/check-inputs.js' %}"></script>
 {% endblock %}
 
 {% block body %}
     <br>
     <div class="form-background-border col-4 offset-4">
-        <form onsubmit="return checkInputs()" action="/register" method="POST">
+        <form onsubmit="return checkInputs()" action="/login" method="POST">
             <br>
             <label for="email" class="form-label">Email:</label>
             <input type="text" class="form-control" autocomplete="off" name="email">
@@ -17,9 +17,11 @@
             <input type="password" id="password" class="form-control" autocomplete="off" name="password">
             {% csrf_token %}
             <br>
-            <input type="submit" value="Login" class="form-button col-2 offset-5"> 
         </form>
+        <button class="form-button col-2 offset-5" onclick="$('form').submit()">Login</button>
         <br>
+        <br>
+        <p class="error-message">{{ error }}</p>
     </div>
     <br>
 {% endblock %}
