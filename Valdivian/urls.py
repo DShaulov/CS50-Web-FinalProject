@@ -18,10 +18,10 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('Main.urls')),
-    path('register', include('Main.urls')),
-    path('login', include('Main.urls')),
-    path('check_if_user_exists', include('Main.urls')),
-    path('logout', include('Main.urls')),
-    path('book-section', include('Main.urls'))
+    path('', include('store.urls')),
+    path('register', include('store.urls')),
+    path('login', include('store.urls')),
+    path('check_if_user_exists', include('store.urls')),
+    path('logout', include('store.urls')),
+    path('book-section', include('store.urls'))
 ]
