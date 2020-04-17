@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth.hashers import make_password
-from .models import User
+from .models import User, Book
 import json
 
 # Create your views here.
@@ -11,12 +11,12 @@ def index(request):
     try:
         context = {
             'user': request.session['user'],
-            'current_page': 'index'
+            'current_page': 'index',
         }
     except KeyError:
         context = {
             'user': '',
-            'current_page': 'index'
+            'current_page': 'index',
         }
 
     return render(request, 'index.html', context=context)
@@ -26,7 +26,7 @@ def register(request):
     if request.method == "GET":
         context = {
             'user': '',
-            'current_page': 'register'
+            'current_page': 'login/register'
         }
         return render(request, 'register.html', context=context)
 
@@ -43,7 +43,6 @@ def register(request):
             password = password_hash,
             first_name = first_name,
             last_name = last_name            
-
         )
 
         new_user.save()
@@ -57,7 +56,7 @@ def login(request):
     if request.method == "GET":
         context = {
             'user': '',
-            'current_page': 'login'
+            'current_page': 'login/register'
         }
         return render(request, 'login.html', context=context)
 
@@ -71,7 +70,9 @@ def login(request):
         # if doesnt exist, return an error 
         if len(user_query_set) == 0:
             context = {
-                'error': '* Email or password incorrect'
+                'user': '',
+                'error': '* Email or password incorrect',
+                'current_page': 'login/register'
             }
             return render(request, 'login.html', context=context)
 
@@ -98,5 +99,22 @@ def check_if_user_exists(request):
 def logout(request):
     del request.session['user']
     return HttpResponseRedirect(redirect_to='/')
+
+def book_section(request):
+    try:
+        context = {
+            'user': request.session['user'],
+            'current_page': 'book-section',
+            'books': Book.objects.all()
+        }
+        return render(request, 'book-section.html', context=context)
+    except KeyError:
+        context = {
+            'user': '',
+            'current_page': 'book-section',
+            'books': Book.objects.all()
+        }
+        return render(request, 'book-section.html', context=context)
+    
 
 

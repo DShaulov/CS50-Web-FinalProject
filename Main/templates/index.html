@@ -1,10 +1,17 @@
 {% extends 'layout.html' %}
+{% load static %}
 
 {% block title %}
     <title>Valdivian</title>
 {% endblock %}
 
+{% block script %}
+
+{% endblock %}
+
 {% block body %}
     <h1>TODO</h1>
     <h4>Welcome {{ user }}</h4>
+    <img src= '{% static "media/book-icon.svg" %}' alt="image" height="50px" width="50px">
+    <a href="/book-section" class="my-links">Book-Section</a>
 {% endblock %}

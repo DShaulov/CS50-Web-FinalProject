@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Book Section</title>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
+
+{% block body %}
+    <h1>TODO</h1>
+    {% for book in books %}
+        <p>{{ book.title }}</p>
+        <img src="{{ book.image_path }}" alt="" height="50px" width="50px">
+    {% endfor %}
+{% endblock %}
