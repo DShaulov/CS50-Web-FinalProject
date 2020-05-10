@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Electronics</title>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
+
+{% block body %}
+    {% for laptop in laptops %}
+    <div class="item-card">
+        <img src="{{ laptop.image_url }}" alt="laptop">
+        <h1>{{ laptop.name }}</h1>
+    </div>
+    {% endfor %}
+{% endblock %}

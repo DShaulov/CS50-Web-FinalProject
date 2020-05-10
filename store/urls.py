@@ -8,5 +8,7 @@ urlpatterns = [
     path('login', views.login, name="login"),
     path('check_if_user_exists', views.check_if_user_exists, name="check_if_user_exists"),
     path('logout', views.logout, name='logout'),
-    path('book-section', views.book_section, name="book-section")
+    path('book-section', views.book_section, name="book-section"),
+    path('write-csv-to-database', views.write_csv_to_database, name="write-csv-to-database"),
+    path('electronics-section', views.electronics_section, name="electronics-section")
 ]

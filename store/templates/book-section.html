@@ -10,9 +10,15 @@
 {% endblock %}
 
 {% block body %}
-    <h1>TODO</h1>
+    <br>
     {% for book in books %}
-        <p>{{ book.title }}</p>
-        <img src="{{ book.image_path }}" alt="" height="50px" width="50px">
+        <div class="book-card">
+            <img src="{{ book.image_path }}" alt="" height="50px" width="50px">
+            <br><br>
+            <p>{{ book.title }}</p>
+            <p>By: {{ book.author }}</p>
+            <p>ISBN: {{ book.isbn }}</p>
+            <button class="form-button">Add To Cart</button>
+        </div>
     {% endfor %}
 {% endblock %}

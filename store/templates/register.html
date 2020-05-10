@@ -13,6 +13,7 @@
 
 {% block body %}
     <br>
+    <br>
     <div class="form-background-border col-4 offset-4">
         <form onsubmit="return checkInputs()" action="/register" method="POST">
             <br>
@@ -29,7 +30,6 @@
             <input type="password" id="password_again" class="form-control" autocomplete="off" name="password_again">
             <br>
             {% csrf_token %}
-            
         </form>
         <button onclick="checkRegisterRestrictions()" class="form-button col-2 offset-5">Register</button>
         <br>
