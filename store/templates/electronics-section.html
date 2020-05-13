@@ -1,18 +1,28 @@
 {% extends 'layout.html' %}
+{% load static %}
 
 {% block title %}
     <title>Electronics</title>
 {% endblock %}
 
 {% block script %}
-
+    <script src="{% static 'scripts/fill-rating.js' %}"></script>
 {% endblock %}
 
 {% block body %}
     {% for laptop in laptops %}
-    <div class="item-card">
-        <img src="{{ laptop.image_url }}" alt="laptop">
-        <h1>{{ laptop.name }}</h1>
+    <div class="item-card" onclick="redirect_to_product_page_laptop()"> 
+        <img src="{{ laptop.image_url }}" alt="laptop" width="50%" height="50%">
+        <p>{{ laptop.manufacturer }}</p>
+        <p>{{ laptop.name }}</p>
+        <p class="database-rating" hidden>{{ laptop.average_rating }}</p>
+        <div class="rating-stars">
+            <span class="fa fa-star-o"></span>
+            <span class="fa fa-star-o"></span>
+            <span class="fa fa-star-o"></span>
+            <span class="fa fa-star-o"></span>
+            <span class="fa fa-star-o"></span>
+        </div>    
     </div>
     {% endfor %}
 {% endblock %}

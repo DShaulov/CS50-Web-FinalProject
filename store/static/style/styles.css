@@ -69,19 +69,20 @@ body, html {
   border-radius: 10px;
 }
 
-.form-background-border, .book-card {
+.form-background-border, .item-card {
   border: solid grey 2px;
   box-shadow: 0px 0px 10px 0px grey;
   border-radius: 5px;
 }
 
-.book-card {
+.item-card {
   text-align: center;
   padding: 10px;
   width: 23%;
   height: 50%;
   float: left;
   margin: 10px;
+  cursor: pointer;
 }
 
 .my-dropdown {
@@ -126,8 +127,12 @@ body, html {
   color: #4b5658;
 }
 
-.item-card {
-  border: 10px solid black;
+.checked {
+  color: orange;
+}
+
+.fa-star-o {
+  color: orange;
 }
 
 /*# sourceMappingURL=styles.css.map */

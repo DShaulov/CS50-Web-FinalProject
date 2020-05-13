@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
 from django.contrib.auth.hashers import make_password
 from .models import User, Book, Laptop
 import csv
@@ -50,8 +49,9 @@ def register(request):
 
         new_user.save()
 
-        # TODO log the user in once he is registered
-        return render(request, 'index.html')
+        # Log the user in once he is registered
+        request.session["user"] = username
+        return HttpResponseRedirect("/")
 
 
 def login(request):

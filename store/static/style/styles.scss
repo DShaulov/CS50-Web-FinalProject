@@ -96,7 +96,7 @@ input {
     @extend .my-text;
 }
 
-.book-card {
+.item-card {
     @extend .form-background-border;
     text-align: center;
     padding: 10px;
@@ -104,6 +104,7 @@ input {
     height: 50%;
     float: left;
     margin: 10px;
+    cursor: pointer;
 }
 
 p {
@@ -157,6 +158,10 @@ a {
     color: $main_text_color;
 }
 
-.item-card {
-    border: 10px solid black;
+.checked {
+    color: orange;
+}
+
+.fa-star-o {
+    color: orange;
 }
