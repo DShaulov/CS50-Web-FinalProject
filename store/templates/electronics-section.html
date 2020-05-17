@@ -7,14 +7,16 @@
 
 {% block script %}
     <script src="{% static 'scripts/fill-rating.js' %}"></script>
+    <script src="{% static 'scripts/redirect-to-electronics-product-page.js' %}"></script>
 {% endblock %}
 
 {% block body %}
     {% for laptop in laptops %}
-    <div class="item-card" onclick="redirect_to_product_page_laptop()"> 
+    <div class="item-card" onclick="redirect_to_electronics_product_page()"> 
         <img src="{{ laptop.image_url }}" alt="laptop" width="50%" height="50%">
         <p>{{ laptop.manufacturer }}</p>
-        <p>{{ laptop.name }}</p>
+        <p class="product-type" hidden>Laptop</p>
+        <p class="product-name">{{ laptop.name }}</p>
         <p class="database-rating" hidden>{{ laptop.average_rating }}</p>
         <div class="rating-stars">
             <span class="fa fa-star-o"></span>

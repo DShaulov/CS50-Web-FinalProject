@@ -13,8 +13,10 @@ class User(models.Model):
         return f"{self.first_name} {self.last_name}, {self.username}"
 
 
+
 class Book(models.Model):
-    title = models.CharField(max_length=64)
+    name = models.CharField(max_length=64)
+    price = models.CharField(max_length=64)
     isbn = models.CharField(max_length=64)
     author = models.CharField(max_length=64)
     published_date = models.CharField(max_length=64)
@@ -26,7 +28,7 @@ class Book(models.Model):
     image_path = models.CharField(max_length=64)
 
     def __str__(self):
-        return f"{self.title}"
+        return f"{self.name}"
 
 class Electronic(models.Model):
     name = models.CharField(max_length=64)

@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.template.loader import render_to_string
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.hashers import make_password
 from .models import User, Book, Laptop
@@ -171,3 +172,11 @@ def electronics_section(request):
             'laptops': Laptop.objects.all()
         }
         return render(request, 'electronics-section.html', context=context)
+
+def electronics_product_page(request):
+    if request.method == "POST":
+        print(request.POST.get("product_type"))
+        print(request.POST.get("product_name"))
+        
+        html = render_to_string("electronics-product-page.html", context=None, request=request)
+        return HttpResponse(html)

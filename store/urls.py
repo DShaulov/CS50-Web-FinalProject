@@ -10,5 +10,6 @@ urlpatterns = [
     path('logout', views.logout, name='logout'),
     path('book-section', views.book_section, name="book-section"),
     path('write-csv-to-database', views.write_csv_to_database, name="write-csv-to-database"),
-    path('electronics-section', views.electronics_section, name="electronics-section")
+    path('electronics-section', views.electronics_section, name="electronics-section"),
+    path('electronics-product-page', views.electronics_product_page, name="electronics-product-page"),
 ]

@@ -25,5 +25,6 @@ urlpatterns = [
     path('logout', include('store.urls')),
     path('book-section', include('store.urls')),
     path('write-csv-to-database', include('store.urls')),
-    path('electronics-section', include('store.urls'))
+    path('electronics-section', include('store.urls')),
+    path('electronics-product-page', include('store.urls'))
 ]
