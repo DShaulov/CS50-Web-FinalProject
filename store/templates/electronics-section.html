@@ -15,8 +15,12 @@
     <div class="item-card" onclick="redirect_to_electronics_product_page()"> 
         <img src="{{ laptop.image_url }}" alt="laptop" width="50%" height="50%">
         <p>{{ laptop.manufacturer }}</p>
-        <p class="product-type" hidden>Laptop</p>
-        <p class="product-name">{{ laptop.name }}</p>
+        <form action="/electronics-product-page" class="electronics-product-form"  method="POST">
+            {% csrf_token %}
+            <input type="text" value="Laptop" class="product-type" name="product_type" hidden>
+            <input type="text" value="{{ laptop.name }}" class="product-name" name="product_name" hidden>
+            <p class="product-name">{{ laptop.name }}</p>
+        </form>
         <p class="database-rating" hidden>{{ laptop.average_rating }}</p>
         <div class="rating-stars">
             <span class="fa fa-star-o"></span>

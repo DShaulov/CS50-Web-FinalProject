@@ -175,8 +175,27 @@ def electronics_section(request):
 
 def electronics_product_page(request):
     if request.method == "POST":
-        print(request.POST.get("product_type"))
-        print(request.POST.get("product_name"))
-        
-        html = render_to_string("electronics-product-page.html", context=None, request=request)
-        return HttpResponse(html)
+        # Get the laptop from the database
+        product_type = request.POST.get("product_type")
+        product_name = request.POST.get("product_name")
+
+        # Choose which database to search based on the product type
+        if product_type == "Laptop":
+            product = Laptop.objects.get(
+                name = product_name
+            )
+
+        try:
+            context = {
+                'user': request.session['user'],
+                'current_page' : "electronics-product-page",
+                'product' : product
+            }
+
+        except KeyError:
+            context = {
+                'user': '',
+                'current_page' : "electronics-product-page",
+                'product' : product
+            }
+        return render(request, "electronics-product-page.html", context=context)

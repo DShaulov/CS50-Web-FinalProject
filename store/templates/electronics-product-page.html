@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-    <title>TODO</title>
+    <title>{{ product.name }}</title>
 {% endblock %}
 
 {% block script %}
@@ -11,5 +11,7 @@
 {% endblock %}
 
 {% block body %}
-    <h1>HEY THIS WORKS!!!!!!</h1>
+<br>
+    {{ product.name }}
+    {{ product.technical_details }}
 {% endblock %}

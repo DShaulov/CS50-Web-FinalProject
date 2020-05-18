@@ -3,16 +3,17 @@ $main_background_color: white;
 $navbar_color: #133c7d;
 $brand_color: #FFFF33;
 
-
-body, html {
-    background-color: $main_background_color;
-    overflow-x: hidden;
-}
-
 .my-text {
     font-family: 'Times New Roman', Times, serif;
     color: $main_text_color;
 }
+
+body, html {
+    @extend .my-text;
+    background-color: $main_background_color;
+    overflow-x: hidden;
+}
+
 
 .my-nav {
     @extend .my-text;
@@ -164,4 +165,21 @@ a {
 
 .fa-star-o {
     color: orange;
+}
+
+.my-mobile-nav {
+    @extend .my-nav;
+}
+
+.mobile-brand {
+    margin-left: 40%;
+}
+
+.mobile-dropdown {
+    width: 100%;
+    height: 100%;
+}
+
+.mobile-searchbar {
+    width: 100%;
 }

@@ -28,7 +28,7 @@
 <body>
     <br>
     <br>
-    <nav class="my-nav">
+    <nav class="my-nav" hidden>
         <a href="#" onclick="open_sidebar()" id="sidebar_opener_icon">
             <i class="fa fa-bars fa-lg sidebar-icon"></i>
         </a>
@@ -41,7 +41,41 @@
         <a href="#" class="my-nav-links col-1" onclick="open_account_sidebar()">Account</a>
     </nav>
 
-    <div class="sidebar dropdown slide-up">
+    <nav class="my-mobile-nav">
+        <a href="#" onclick="open_sidebar()" id="sidebar_opener_icon">
+            <i class="fa fa-bars fa-lg sidebar-icon"></i>
+        </a>
+        <a href="/" class="my-brand col-2 mobile-brand">Valdivian</a>
+    </nav>
+
+    <div class="sidebar dropdown slide-up mobile-dropdown">
+        <h1 class="my-text">Welcome</h1>
+        {% if current_page != 'login/register' %}
+        <input type="text" placeholder="Search..." class="col-6 offset-2 my-searchbar mobile-searchbar">
+        {% endif %}
+        {% if user == '' %}
+        <div class="sidebar-item">
+            <a href="/login" class="my-links">Login</a>
+        </div>
+        <div class="sidebar-item">
+            <a href="/register" class="my-links">Register</a>
+        </div>
+        {% endif %}
+        <div class="sidebar-item">
+            <a href="/book-section" class="my-links">Book Section</a>
+        </div>
+        <div class="sidebar-item">
+            <a href="/electronics-section" class="my-links">Electronics Section</a>
+        </div>
+        {% if user != '' %}
+        <br>
+        <div class="sidebar-item">
+            <a href="/logout" class="my-links">Logout</a>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="sidebar dropdown slide-up desktop-dropdown" hidden>
         <br>
         <h1 class="my-text">Welcome</h1>
         <div class="sidebar-item">
