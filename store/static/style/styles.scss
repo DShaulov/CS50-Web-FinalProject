@@ -12,6 +12,9 @@ body, html {
     @extend .my-text;
     background-color: $main_background_color;
     overflow-x: hidden;
+    @media screen and (max-width: 1000px) {
+        font-size: 1.5em;
+    }
 }
 
 
@@ -24,6 +27,20 @@ body, html {
     top: 0;
     width: 100%;
     z-index: 2;
+
+    @media screen and (max-width: 1000px) {
+        display: none;
+    }
+}
+
+.my-mobile-nav {
+    @extend .my-nav;
+    @media screen and (max-width: 1000px) {
+        display: grid;
+    }
+    @media screen and (min-width: 1000px) {
+        display: none;
+    }
 }
 
 
@@ -34,6 +51,9 @@ body, html {
     padding: 5px;
     font-size: 40px;
     text-shadow: 0px 4px 10px black;
+    @media screen and (max-width: 1000px) {
+        font-size: 2em;
+    }
 }
 
 .my-brand:hover {
@@ -138,11 +158,17 @@ a {
     padding: 10px;
     border: 2px solid $brand_color;
     border-radius: 5px;
-    margin: 10px;
+    margin: 0.5%;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 5;
+
+    @media screen and (max-width: 1000px) {
+        margin: 3%;
+        size: 2em;
+
+    }
 }
 
 .account-sidebar {
@@ -167,19 +193,46 @@ a {
     color: orange;
 }
 
-.my-mobile-nav {
-    @extend .my-nav;
-}
+
 
 .mobile-brand {
-    margin-left: 40%;
+    margin-left: 34%;
+}
+
+
+
+.mobile-searchbar {
+    width: 100%;
 }
 
 .mobile-dropdown {
     width: 100%;
     height: 100%;
+    text-align: center;
 }
 
-.mobile-searchbar {
-    width: 100%;
+.mobile-item {
+    padding: 1%;
+}
+
+.store-main-image {
+    height: 18%;
+    width:18%;
+    margin: 1%;
+}
+
+.promotion-div {
+    text-align: center;
+    background-color: lightcoral;
+}
+
+.store-main-image-woman {
+    @extend .store-main-image;
+    height: 30%;
+    width: 30%;
+}
+
+.store-main-slogan {
+    @extend .my-text;
+    color: $brand_color;
 }

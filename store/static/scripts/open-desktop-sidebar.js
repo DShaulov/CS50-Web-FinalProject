@@ -2,8 +2,8 @@
  * contains a function that opens the sidebar
  */
 
- function open_sidebar(){
-   $('.sidebar').slideToggle();
+ function open_desktop_sidebar(){
+   $('.desktop-sidebar').slideToggle();
 
    //TODO Dim input fields
    //! Cant dim input fields

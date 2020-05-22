@@ -18,8 +18,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
-    <script src="{% static 'scripts/open-sidebar.js' %}"></script>
+    <script src="{% static 'scripts/open-mobile-dropdown.js' %}"></script>
     <script src="{% static 'scripts/open-account-sidebar.js' %}"></script>
+    <script src="{% static 'scripts/open-desktop-sidebar.js' %}"></script>
     {% block script %}
 
     {% endblock %}
@@ -28,8 +29,8 @@
 <body>
     <br>
     <br>
-    <nav class="my-nav" hidden>
-        <a href="#" onclick="open_sidebar()" id="sidebar_opener_icon">
+    <nav class="my-nav">
+        <a href="#" onclick="open_desktop_sidebar()" id="sidebar_opener_icon">
             <i class="fa fa-bars fa-lg sidebar-icon"></i>
         </a>
         <i class="col-1"></i>
@@ -42,40 +43,41 @@
     </nav>
 
     <nav class="my-mobile-nav">
-        <a href="#" onclick="open_sidebar()" id="sidebar_opener_icon">
+        <a href="#" onclick="open_mobile_dropdown()" id="sidebar_opener_icon">
             <i class="fa fa-bars fa-lg sidebar-icon"></i>
         </a>
         <a href="/" class="my-brand col-2 mobile-brand">Valdivian</a>
     </nav>
 
     <div class="sidebar dropdown slide-up mobile-dropdown">
-        <h1 class="my-text">Welcome</h1>
+        <br>
+        <h1 class="my-text mobile-item">Welcome</h1>
         {% if current_page != 'login/register' %}
-        <input type="text" placeholder="Search..." class="col-6 offset-2 my-searchbar mobile-searchbar">
+        <input type="text" placeholder="Search..." class="my-searchbar mobile-searchbar mobile-item">
         {% endif %}
         {% if user == '' %}
-        <div class="sidebar-item">
+        <div class="sidebar-item mobile-item">
             <a href="/login" class="my-links">Login</a>
         </div>
-        <div class="sidebar-item">
+        <div class="sidebar-item mobile-item">
             <a href="/register" class="my-links">Register</a>
         </div>
         {% endif %}
-        <div class="sidebar-item">
+        <div class="sidebar-item mobile-item">
             <a href="/book-section" class="my-links">Book Section</a>
         </div>
-        <div class="sidebar-item">
+        <div class="sidebar-item mobile-item">
             <a href="/electronics-section" class="my-links">Electronics Section</a>
         </div>
         {% if user != '' %}
         <br>
-        <div class="sidebar-item">
+        <div class="sidebar-item mobile-item">
             <a href="/logout" class="my-links">Logout</a>
         </div>
         {% endif %}
     </div>
 
-    <div class="sidebar dropdown slide-up desktop-dropdown" hidden>
+    <div class="sidebar dropdown slide-up desktop-sidebar">
         <br>
         <h1 class="my-text">Welcome</h1>
         <div class="sidebar-item">
