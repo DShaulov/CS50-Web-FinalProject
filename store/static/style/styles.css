@@ -1,4 +1,4 @@
-.my-text, .store-main-slogan, a, p, input, .form-label, .form-button, .my-links, .my-nav-links, .my-brand, .my-nav, .my-mobile-nav, body, html {
+.my-text, .add-to-cart-btn, .store-main-slogan, a, p, input, .form-label, .form-button, .my-links, .my-nav-links, .my-brand, .my-nav, .my-mobile-nav, body, html {
   font-family: "Times New Roman", Times, serif;
   color: #4b5658;
 }
@@ -203,6 +203,23 @@ body, html {
 
 .store-main-slogan {
   color: #FFFF33;
+}
+
+.product-page-div {
+  text-align: center;
+  margin-left: 5%;
+  width: 85%;
+}
+
+.add-to-cart-btn {
+  background-color: #FFFF33;
+  border: 1px black solid;
+  border-radius: 10px;
+  padding-left: 2%;
+  padding-right: 2%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  box-shadow: 0px 5px 10px;
 }
 
 /*# sourceMappingURL=styles.css.map */

@@ -6,6 +6,7 @@ from .models import User, Book, Laptop
 import csv
 import json
 import math
+import random
 
 # Create your views here.
 
@@ -198,4 +199,46 @@ def electronics_product_page(request):
                 'current_page' : "electronics-product-page",
                 'product' : product
             }
+
         return render(request, "electronics-product-page.html", context=context)
+
+
+def book_product_page(request):
+    if request.method == "POST":
+        book_isbn = request.POST.get('book_isbn')
+        
+        book = Book.objects.get(
+            isbn = book_isbn
+        )
+
+        try:
+            context = {
+                'user': request.session['user'],
+                'current_page' : "book-product-page",
+                'book' : book
+            }
+
+        except KeyError:
+            context = {
+                'user': '',
+                'current_page' : "book-product-page",
+                'book' : book
+            }
+
+
+        return render(request, "book-product-page.html", context=context)
+
+def delete_duplicates(reqeust):
+    all_books = Book.objects.all()
+
+    for book in all_books:
+        random_price = random.randint(5, 20)
+        random_price = random_price - 0.01
+        random_price = "$" + str(random_price)
+
+        book.price = random_price
+        book.save()
+        print(random_price)
+
+            
+    return HttpResponseRedirect("/")

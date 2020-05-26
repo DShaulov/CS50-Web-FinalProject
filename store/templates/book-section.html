@@ -6,19 +6,33 @@
 {% endblock %}
 
 {% block script %}
+    <script src="{% static 'scripts/redirect-to-book-product-page.js' %}"></script>
+    <script src="{% static 'scripts/fill-rating.js' %}"></script>
 
 {% endblock %}
 
 {% block body %}
     <br>
     {% for book in books %}
-        <div class="item-card">
-            <img src="{{ book.image_path }}" alt="" height="50px" width="50px">
+        <div class="item-card" onclick="redirect_to_book_product_page()">
+            <img src="{{ book.image_path }}" alt="" height="10%" width="10%">
             <br><br>
-            <p>{{ book.title }}</p>
+            <p>{{ book.name }}</p>
             <p>By: {{ book.author }}</p>
-            <p>ISBN: {{ book.isbn }}</p>
-            <button class="form-button">Add To Cart</button>
+            <form action="/book-product-page" class="book-product-form" method="POST">
+                {% csrf_token %}
+                <input type="text" name="book_isbn" value="{{ book.isbn }}" hidden>
+            </form>
+            <p>{{ book.price }}</p>
+            <p class="database-rating" hidden>{{ book.average_rating }}</p>
+            <div class="rating-stars">
+                <span class="fa fa-star-o"></span>
+                <span class="fa fa-star-o"></span>
+                <span class="fa fa-star-o"></span>
+                <span class="fa fa-star-o"></span>
+                <span class="fa fa-star-o"></span>
+                <span>({{ book.review_count }} reviews)</span>
+            </div>
         </div>
     {% endfor %}
 {% endblock %}

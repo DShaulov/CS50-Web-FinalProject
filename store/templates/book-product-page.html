@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+    <title>{{ book.name }}</title>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'scripts/fill-rating.js' %}"></script>
+{% endblock %} 
+
+{% block body %}
+    <br>
+    <br>
+    <div class="product-page-div">
+        <img src="{{ book.image_path }}" alt="" height=10% width=10%>
+        <br>
+        <br>
+        <p>{{ book.name }}</p>
+        <p>{{ book.author }}</p>
+        <p>{{ book.description }}</p>
+        <p>{{ book.price }}</p>
+        <p>Published: {{ book.published_date }}</p>
+        <p>By {{ book.publisher }}</p>
+        <p class="database-rating" hidden>{{ book.average_rating }}</p>
+            <div class="rating-stars">
+                <span class="fa fa-star-o"></span>
+                <span class="fa fa-star-o"></span>
+                <span class="fa fa-star-o"></span>
+                <span class="fa fa-star-o"></span>
+                <span class="fa fa-star-o"></span>
+                <span>({{ book.review_count }} reviews)</span>
+            </div>
+            <br>
+        <button class="add-to-cart-btn">Add To Cart</button>
+        <br>
+        <br>
+    </div>
+{% endblock %}

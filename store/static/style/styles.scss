@@ -236,3 +236,21 @@ a {
     @extend .my-text;
     color: $brand_color;
 }
+
+.product-page-div {
+    text-align: center;
+    margin-left: 5%;
+    width: 85%;
+}
+
+.add-to-cart-btn {
+    @extend .my-text;
+    background-color: $brand_color;
+    border: 1px black solid;
+    border-radius: 10px;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    box-shadow: 0px 5px 10px;
+}

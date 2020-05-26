@@ -7,7 +7,6 @@ $(document).ready( () => {
     $(".rating-stars").each( (element) => {
         // for each rating bar, check whats the databse rating
         database_rating = $('.rating-stars')[element].previousElementSibling.innerHTML;
-        console.log(database_rating);
 
         // according to the database rating, fill out the stars
         all_stars = $('.rating-stars')[element].children

@@ -26,6 +26,8 @@ class Book(models.Model):
     genre = models.CharField(max_length=64)
     language = models.CharField(max_length=64)
     image_path = models.CharField(max_length=64)
+    review_count = models.CharField(max_length=64, default=0)
+    average_rating = models.CharField(max_length=64, default=0)
 
     def __str__(self):
         return f"{self.name}"

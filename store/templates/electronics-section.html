@@ -21,6 +21,7 @@
             <input type="text" value="{{ laptop.name }}" class="product-name" name="product_name" hidden>
             <p class="product-name">{{ laptop.name }}</p>
         </form>
+        <p>{{ laptop.price }}</p>
         <p class="database-rating" hidden>{{ laptop.average_rating }}</p>
         <div class="rating-stars">
             <span class="fa fa-star-o"></span>
@@ -28,6 +29,8 @@
             <span class="fa fa-star-o"></span>
             <span class="fa fa-star-o"></span>
             <span class="fa fa-star-o"></span>
+            <span>({{ laptop.review_count }} reviews)</span>
+
         </div>    
     </div>
     {% endfor %}
