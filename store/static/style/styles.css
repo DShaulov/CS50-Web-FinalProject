@@ -13,6 +13,11 @@ body, html {
   }
 }
 
+.body-block {
+  height: 100%;
+  width: 100%;
+}
+
 .my-nav, .my-mobile-nav {
   background-color: #133c7d;
   box-shadow: 0px 1px 15px 1px black;
@@ -95,20 +100,26 @@ body, html {
   border-radius: 10px;
 }
 
-.form-background-border, .item-card {
+.form-background-border, .item-card, .item-card-electronics {
   border: solid grey 2px;
   box-shadow: 0px 0px 10px 0px grey;
   border-radius: 5px;
 }
 
-.item-card {
+.item-card, .item-card-electronics {
+  display: inline-block;
   text-align: center;
   padding: 10px;
-  width: 23%;
-  height: 50%;
-  float: left;
+  width: 30%;
+  height: 30vh;
   margin: 10px;
+  white-space: initial;
   cursor: pointer;
+  overflow-y: auto;
+}
+
+.item-card-electronics {
+  height: 38vh;
 }
 
 .my-dropdown {
@@ -220,6 +231,45 @@ body, html {
   padding-top: 1%;
   padding-bottom: 1%;
   box-shadow: 0px 5px 10px;
+}
+
+.books-category-div {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  display: inline-block;
+  white-space: nowrap;
+  width: 90vw;
+  height: 35vh;
+  margin-left: 10vh;
+  overflow-x: hidden;
+}
+
+.laptops-category-div {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  display: inline-block;
+  white-space: nowrap;
+  width: 90vw;
+  height: 40vh;
+  margin-left: 10vh;
+}
+
+.fa-caret-square-o-left {
+  position: absolute;
+  top: 50%;
+  left: 2%;
+  cursor: pointer;
+}
+
+.fa-caret-square-o-right {
+  position: absolute;
+  top: 50%;
+  right: 2%;
+  cursor: pointer;
+}
+
+.wrapper {
+  position: relative;
 }
 
 /*# sourceMappingURL=styles.css.map */

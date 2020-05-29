@@ -2,36 +2,43 @@
 {% load static %}
 
 {% block title %}
-    <title>Electronics</title>
+    <title>Valdivian - Electronics</title>
 {% endblock %}
 
 {% block script %}
     <script src="{% static 'scripts/fill-rating.js' %}"></script>
     <script src="{% static 'scripts/redirect-to-electronics-product-page.js' %}"></script>
+    <script src="{% static 'scripts/arrow-btn-scroll.js' %}"></script>
 {% endblock %}
 
 {% block body %}
-    {% for laptop in laptops %}
-    <div class="item-card" onclick="redirect_to_electronics_product_page()"> 
-        <img src="{{ laptop.image_url }}" alt="laptop" width="50%" height="50%">
-        <p>{{ laptop.manufacturer }}</p>
-        <form action="/electronics-product-page" class="electronics-product-form"  method="POST">
-            {% csrf_token %}
-            <input type="text" value="Laptop" class="product-type" name="product_type" hidden>
-            <input type="text" value="{{ laptop.name }}" class="product-name" name="product_name" hidden>
-            <p class="product-name">{{ laptop.name }}</p>
-        </form>
-        <p>{{ laptop.price }}</p>
-        <p class="database-rating" hidden>{{ laptop.average_rating }}</p>
-        <div class="rating-stars">
-            <span class="fa fa-star-o"></span>
-            <span class="fa fa-star-o"></span>
-            <span class="fa fa-star-o"></span>
-            <span class="fa fa-star-o"></span>
-            <span class="fa fa-star-o"></span>
-            <span>({{ laptop.review_count }} reviews)</span>
-
-        </div>    
+<div class="wrapper">
+    <i class="fa fa-caret-square-o-left fa-3x" aria-hidden="true" onclick="scroll_left()"></i>
+    <div class="laptops-category-div">
+        {% for laptop in laptops %}
+        <div class="item-card item-card-electronics" onclick="redirect_to_electronics_product_page()"> 
+            <img src="{{ laptop.generic_image_path }}" alt="laptop" width="50%" height="50%">
+            <form action="/electronics-product-page" class="electronics-product-form"  method="POST">
+                {% csrf_token %}
+                <input type="text" value="Laptop" class="product-type" name="product_type" hidden>
+                <input type="text" value="{{ laptop.name }}" class="product-name" name="product_name" hidden>
+                <p class="product-name">{{ laptop.name }}</p>
+            </form>
+            <p>{{ laptop.price }}</p>
+            <p class="database-rating" hidden>{{ laptop.average_rating }}</p>
+            <div class="rating-stars">
+                <span class="fa fa-star-o"></span>
+                <span class="fa fa-star-o"></span>
+                <span class="fa fa-star-o"></span>
+                <span class="fa fa-star-o"></span>
+                <span class="fa fa-star-o"></span>
+                <span>({{ laptop.review_count }} reviews)</span>
+            </div>    
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
+    <i class="fa fa-caret-square-o-right fa-3x" aria-hidden="true" onclick="scroll_right()"></i>
+</div>
+
+
 {% endblock %}

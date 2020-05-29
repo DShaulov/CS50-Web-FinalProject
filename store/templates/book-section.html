@@ -2,37 +2,44 @@
 {% load static %}
 
 {% block title %}
-    <title>Book Section</title>
+    <title>Valdivian - Book Section</title>
 {% endblock %}
 
 {% block script %}
     <script src="{% static 'scripts/redirect-to-book-product-page.js' %}"></script>
     <script src="{% static 'scripts/fill-rating.js' %}"></script>
+    <script src="{% static 'scripts/arrow-btn-scroll.js' %}"></script>
 
 {% endblock %}
 
 {% block body %}
-    <br>
-    {% for book in books %}
-        <div class="item-card" onclick="redirect_to_book_product_page()">
-            <img src="{{ book.image_path }}" alt="" height="10%" width="10%">
-            <br><br>
-            <p>{{ book.name }}</p>
-            <p>By: {{ book.author }}</p>
-            <form action="/book-product-page" class="book-product-form" method="POST">
-                {% csrf_token %}
-                <input type="text" name="book_isbn" value="{{ book.isbn }}" hidden>
-            </form>
-            <p>{{ book.price }}</p>
-            <p class="database-rating" hidden>{{ book.average_rating }}</p>
-            <div class="rating-stars">
-                <span class="fa fa-star-o"></span>
-                <span class="fa fa-star-o"></span>
-                <span class="fa fa-star-o"></span>
-                <span class="fa fa-star-o"></span>
-                <span class="fa fa-star-o"></span>
-                <span>({{ book.review_count }} reviews)</span>
+<div class="wrapper">
+    <i class="fa fa-caret-square-o-left fa-3x" aria-hidden="true" onclick="scroll_left()"></i>
+        <br>
+        <div class="books-category-div">
+            {% for book in books %}
+            <div class="item-card" onclick="redirect_to_book_product_page()">   
+                <img src="{{ book.generic_image_path }}" alt="" height="30%" width="30%">
+                <br><br>
+                <p>{{ book.name }}</p>
+                <p>By: {{ book.author }}</p>
+                <form action="/book-product-page" class="book-product-form" method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="book_isbn" value="{{ book.isbn }}" hidden>
+                </form>
+                <p>{{ book.price }}</p>
+                <p class="database-rating" hidden>{{ book.average_rating }}</p>
+                <div class="rating-stars">
+                    <span class="fa fa-star-o"></span>
+                    <span class="fa fa-star-o"></span>
+                    <span class="fa fa-star-o"></span>
+                    <span class="fa fa-star-o"></span>
+                    <span class="fa fa-star-o"></span>
+                    <span>({{ book.review_count }} reviews)</span>
+                </div>
             </div>
+        {% endfor %}
         </div>
-    {% endfor %}
+    <i class="fa fa-caret-square-o-right fa-3x" aria-hidden="true" onclick="scroll_right()"></i>
+</div>
 {% endblock %}

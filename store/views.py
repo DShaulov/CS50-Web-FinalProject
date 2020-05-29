@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.template.loader import render_to_string
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.hashers import make_password
-from .models import User, Book, Laptop
+from .models import User, Book, Laptop, Product
 import csv
 import json
 import math
@@ -150,7 +150,7 @@ def write_csv_to_database(request):
                 genre=genre,
                 language=language,
                 publisher=publisher,
-                image_path='/static/media/book-icon.svg'
+                generic_image_path='/static/media/book-icon.svg'
             )
 
             new_book.save()
@@ -186,20 +186,38 @@ def electronics_product_page(request):
                 name = product_name
             )
 
+        technical_details = product.technical_details
+        technical_details_formatted = {}
+        container = ""
+        for letter in technical_details:
+            if letter == '\n':
+                container = container.replace('\r', '')
+                key = container.split("\t")[0]
+                value = container.split("\t")[1]
+                print(key + ":" + value)
+                technical_details_formatted[key] = value
+                container = ""
+                continue
+
+            container = container + letter
+
         try:
             context = {
                 'user': request.session['user'],
                 'current_page' : "electronics-product-page",
-                'product' : product
+                'product' : product,
+                'technical_details': technical_details_formatted
             }
 
         except KeyError:
             context = {
                 'user': '',
                 'current_page' : "electronics-product-page",
-                'product' : product
+                'product' : product,
+                'technical_details': technical_details_formatted
             }
 
+    
         return render(request, "electronics-product-page.html", context=context)
 
 
@@ -241,4 +259,26 @@ def delete_duplicates(reqeust):
         print(random_price)
 
             
+    return HttpResponseRedirect("/")
+
+def update_product_database(request):
+    # get all the products and delete them
+    all_products = Product.objects.all()
+    all_products.delete()
+
+    # add new products from each table
+    all_laptops = Laptop.objects.all()
+    all_books = Book.objects.all()
+
+
+    for laptop in all_laptops:
+        laptop_product = Product(
+            name = laptop.name,
+            price = laptop.price,
+            type = "Laptop",
+            average_rating = laptop.average_rating,
+            review_count = laptop.review_count
+        
+        )
+
     return HttpResponseRedirect("/")

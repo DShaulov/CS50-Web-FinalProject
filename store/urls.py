@@ -13,5 +13,6 @@ urlpatterns = [
     path('electronics-section', views.electronics_section, name="electronics-section"),
     path('electronics-product-page', views.electronics_product_page, name="electronics-product-page"),
     path('book-product-page', views.book_product_page, name="book-product-page"),
-    path('delete-duplicates', views.delete_duplicates, name="delete-duplicates")
+    path('delete-duplicates', views.delete_duplicates, name="delete-duplicates"),
+    path('update-product-database', views.update_product_database, name="update-product-database")
 ]

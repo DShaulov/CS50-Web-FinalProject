@@ -28,5 +28,6 @@ urlpatterns = [
     path('electronics-section', include('store.urls')),
     path('electronics-product-page', include('store.urls')),
     path('book-product-page', include('store.urls')),
-    path('delete-duplciates', include('store.urls'))
+    path('delete-duplciates', include('store.urls')),
+    path('update-product-database', include('store.urls'))
 ]
