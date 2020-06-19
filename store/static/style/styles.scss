@@ -85,7 +85,7 @@ body, html {
 
 .my-nav-links {
     @extend .my-links;
-    float: right;
+    float: none;
     color: $brand_color;
 }
 
@@ -304,4 +304,42 @@ a {
 
 .wrapper {
     position: relative;
+}
+
+.search-form {
+    display: inline-block;
+    width: 70%;
+}
+
+.fa-search {
+    color: $brand_color;
+    cursor: pointer;
+}
+
+.shoppingcart-img {
+    width: 45%;
+    height: 45%;
+}
+
+.cart-link {
+    width: 5%;
+    position: fixed;
+    top: 1%;
+    right: 0%;
+}
+
+.cart-counter {
+    width: 5%;
+    position: fixed;
+    top: 4%;
+    right: 1%;
+}
+
+.counter {
+    @extend .my-text;
+    color: $brand_color;
+}
+
+.checkout-link {
+    @extend .my-links;
 }

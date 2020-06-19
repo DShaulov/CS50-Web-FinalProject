@@ -8,15 +8,16 @@
 
 {% block script %}
     <script src="{% static 'scripts/fill-rating.js' %}"></script>
+    <script src="{% static 'scripts/add-to-cart.js' %}"></script>
 {% endblock %}
 
 {% block body %}
     <div class="product-page-div">
-        <img src="{{ product.image_url }}" alt="" height=10% width=10%>
+        <img src="{{ product.generic_image_path }}" alt="" height=10% width=10%>
         <br>
         <br>
-        <p>{{ product.name }}</p>
-        <p>{{ book.price }}</p>
+        <p class="product-name">{{ product.name }}</p>
+        <p>{{ product.price }}</p>
         <p class="database-rating" hidden>{{ product.average_rating }}</p>
             <div class="rating-stars">
                 <span class="fa fa-star-o"></span>
@@ -30,7 +31,8 @@
         {% for key, value in technical_details.items %}
             <p>{{ key }} : {{ value }} </p>
         {% endfor %}
-        <button class="add-to-cart-btn">Add To Cart</button>
+        <button class="add-to-cart-btn" onclick="add_to_cart()">Add To Cart</button>
+        <p hidden class="product-type">Laptop</p>
         <br>
         <br>
     </div>

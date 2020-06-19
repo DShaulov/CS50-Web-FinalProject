@@ -29,5 +29,9 @@ urlpatterns = [
     path('electronics-product-page', include('store.urls')),
     path('book-product-page', include('store.urls')),
     path('delete-duplciates', include('store.urls')),
-    path('update-product-database', include('store.urls'))
+    path('update-product-database', include('store.urls')),
+    path('search-results', include('store.urls')),
+    path('cart-page', include('store.urls')),
+    path('add-to-cart', include('store.urls')),
+    path('checkout', include('store.urls')),
 ]

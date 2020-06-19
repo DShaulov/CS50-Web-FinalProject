@@ -21,6 +21,7 @@
     <script src="{% static 'scripts/open-mobile-dropdown.js' %}"></script>
     <script src="{% static 'scripts/open-account-sidebar.js' %}"></script>
     <script src="{% static 'scripts/open-desktop-sidebar.js' %}"></script>
+    <script src="{% static 'scripts/searchbar-submit.js' %}"></script>
     {% block script %}
 
     {% endblock %}
@@ -37,9 +38,20 @@
         <i class="col-1"></i>
         <a href="/" class="my-brand col-2">Valdivian</a>
         {% if current_page != 'login/register' %}
-        <input type="text" placeholder="Search..." class="col-6 offset-2 my-searchbar">
-        {% endif %}
+        <form action="/search-results" class="search-form" method="POST">
+            {% csrf_token %}
+            <input type="text" placeholder="Search..." class="col-8 offset-2 my-searchbar" name="search-text">
+            <i class="fa fa-search fa-lg looking-glass" aria-hidden="true"></i>
+        </form>
         <a href="#" class="my-nav-links col-1" onclick="open_account_sidebar()">Account</a>
+        {% else %}
+        <div class="col-1 offset-8" style="display: inline">
+            <a href="#" class="my-nav-links" onclick="open_account_sidebar()">Account</a>
+        </div>
+        {% endif %}
+        
+        <a href="/cart-page" class="cart-link"><img src="{% static 'media/shoppingcart.png' %}" alt="" class="shoppingcart-img"></a>
+        
     </nav>
 
     <nav class="my-mobile-nav">
@@ -79,7 +91,7 @@
 
     <div class="sidebar dropdown slide-up desktop-sidebar">
         <br>
-        <h1 class="my-text">Welcome</h1>
+        <h1 class="my-text">Welcome {{ user_first_name }}</h1>
         <div class="sidebar-item">
             <a href="/book-section" class="my-links">Book Section</a>
         </div>

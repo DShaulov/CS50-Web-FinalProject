@@ -1,0 +1,80 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block title %}
+    <title>Search Results:</title>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'scripts/fill-rating.js' %}"></script>
+    <script src="{% static 'scripts/redirect-to-electronics-product-page.js' %}"></script>
+    <script src="{% static 'scripts/arrow-btn-scroll.js' %}"></script>
+    <script src="{% static 'scripts/redirect-to-book-product-page.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+    {% for  laptop in search_results_laptops_name %}
+    <div class="item-card item-card-electronics" onclick="redirect_to_electronics_product_page()"> 
+        <img src="{{ laptop.generic_image_path }}" alt="laptop" width="50%" height="50%">
+        <form action="/electronics-product-page" class="electronics-product-form"  method="POST">
+            {% csrf_token %}
+            <input type="text" value="Laptop" class="product-type" name="product_type" hidden>
+            <input type="text" value="{{ laptop.name }}" class="product-name" name="product_name" hidden>
+            <p class="product-name">{{ laptop.name }}</p>
+        </form>
+        <p>{{ laptop.price }}</p>
+        <p class="database-rating" hidden>{{ laptop.average_rating }}</p>
+        <div class="rating-stars">
+            <span class="fa fa-star-o"></span>
+            <span class="fa fa-star-o"></span>
+            <span class="fa fa-star-o"></span>
+            <span class="fa fa-star-o"></span>
+            <span class="fa fa-star-o"></span>
+            <span>({{ laptop.review_count }} reviews)</span>
+        </div>    
+    </div>
+    {% endfor %}
+    {% for book in search_results_books_name %}
+    <div class="item-card" onclick="redirect_to_book_product_page()">   
+        <img src="{{ book.generic_image_path }}" alt="" height="30%" width="30%">
+        <br><br>
+        <p>{{ book.name }}</p>
+        <p>By: {{ book.author }}</p>
+        <form action="/book-product-page" class="book-product-form" method="POST">
+            {% csrf_token %}
+            <input type="text" name="book_isbn" value="{{ book.isbn }}" hidden>
+        </form>
+        <p>{{ book.price }}</p>
+        <p class="database-rating" hidden>{{ book.average_rating }}</p>
+        <div class="rating-stars">
+            <span class="fa fa-star-o"></span>
+            <span class="fa fa-star-o"></span>
+            <span class="fa fa-star-o"></span>
+            <span class="fa fa-star-o"></span>
+            <span class="fa fa-star-o"></span>
+            <span>({{ book.review_count }} reviews)</span>
+        </div>
+    </div>
+    {% endfor %}
+    {% for book in search_results_books_author %}
+    <div class="item-card" onclick="redirect_to_book_product_page()">   
+        <img src="{{ book.generic_image_path }}" alt="" height="30%" width="30%">
+        <br><br>
+        <p>{{ book.name }}</p>
+        <p>By: {{ book.author }}</p>
+        <form action="/book-product-page" class="book-product-form" method="POST">
+            {% csrf_token %}
+            <input type="text" name="book_isbn" value="{{ book.isbn }}" hidden>
+        </form>
+        <p>{{ book.price }}</p>
+        <p class="database-rating" hidden>{{ book.average_rating }}</p>
+        <div class="rating-stars">
+            <span class="fa fa-star-o"></span>
+            <span class="fa fa-star-o"></span>
+            <span class="fa fa-star-o"></span>
+            <span class="fa fa-star-o"></span>
+            <span class="fa fa-star-o"></span>
+            <span>({{ book.review_count }} reviews)</span>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}

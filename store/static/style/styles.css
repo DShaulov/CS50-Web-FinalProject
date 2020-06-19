@@ -1,4 +1,4 @@
-.my-text, .add-to-cart-btn, .store-main-slogan, a, p, input, .form-label, .form-button, .my-links, .my-nav-links, .my-brand, .my-nav, .my-mobile-nav, body, html {
+.my-text, .counter, .add-to-cart-btn, .store-main-slogan, a, p, input, .form-label, .form-button, .my-links, .checkout-link, .my-nav-links, .my-brand, .my-nav, .my-mobile-nav, body, html {
   font-family: "Times New Roman", Times, serif;
   color: #4b5658;
 }
@@ -66,19 +66,19 @@ body, html {
   padding: 10px;
 }
 
-.my-links, .my-nav-links {
+.my-links, .checkout-link, .my-nav-links {
   font-size: larger;
   padding: 10px;
   margin: 10px;
 }
 
-.my-links:hover, .my-nav-links:hover {
+.my-links:hover, .checkout-link:hover, .my-nav-links:hover {
   color: #171b1c;
   text-decoration: none;
 }
 
 .my-nav-links {
-  float: right;
+  float: none;
   color: #FFFF33;
 }
 
@@ -270,6 +270,39 @@ body, html {
 
 .wrapper {
   position: relative;
+}
+
+.search-form {
+  display: inline-block;
+  width: 70%;
+}
+
+.fa-search {
+  color: #FFFF33;
+  cursor: pointer;
+}
+
+.shoppingcart-img {
+  width: 45%;
+  height: 45%;
+}
+
+.cart-link {
+  width: 5%;
+  position: fixed;
+  top: 1%;
+  right: 0%;
+}
+
+.cart-counter {
+  width: 5%;
+  position: fixed;
+  top: 4%;
+  right: 1%;
+}
+
+.counter {
+  color: #FFFF33;
 }
 
 /*# sourceMappingURL=styles.css.map */

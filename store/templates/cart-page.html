@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+    <Title>Cart</Title>
+{% endblock %}
+    
+{% block script %}
+    <script src="{% static 'scripts/calculate-cart-total.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+    <table>
+        <thead>
+            <th>
+                Product Name
+            </th>
+            <th>
+                Amount
+            </th>
+            <th>
+                Price
+            </th>
+        </thead>
+    {% for product in cart %}
+        <tr>
+            <td>
+                {{ product.name }}
+            </td>
+            <td class="amount">
+                {{ product.amount }}
+            </td>
+            <td class="price">
+                {{ product.price }}
+            </td>
+        </tr>
+    {% endfor %}
+        <tr>
+            <td>
+
+            </td>
+            <td>
+
+            </td>
+            <td class="total-amount">
+
+            </td>
+        </tr>
+    </table>
+
+    <a href="/checkout" class="checkout-link">Checkout</a>
+{% endblock %}

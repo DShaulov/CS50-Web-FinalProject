@@ -7,16 +7,17 @@
 
 {% block script %}
     <script src="{% static 'scripts/fill-rating.js' %}"></script>
+    <script src="{% static 'scripts/add-to-cart.js' %}"></script>
 {% endblock %} 
 
 {% block body %}
     <br>
     <br>
     <div class="product-page-div">
-        <img src="{{ book.image_path }}" alt="" height=10% width=10%>
+        <img src="{{ book.generic_image_path }}" alt="" height=10% width=10%>
         <br>
         <br>
-        <p>{{ book.name }}</p>
+        <p class="product-name">{{ book.name }}</p>
         <p>{{ book.author }}</p>
         <p>{{ book.description }}</p>
         <p>{{ book.price }}</p>
@@ -32,7 +33,8 @@
                 <span>({{ book.review_count }} reviews)</span>
             </div>
             <br>
-        <button class="add-to-cart-btn">Add To Cart</button>
+        <button class="add-to-cart-btn" onclick="add_to_cart()">Add To Cart</button>
+        <p hidden class="product-type">Book</p>
         <br>
         <br>
     </div>

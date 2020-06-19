@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.template.loader import render_to_string
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.hashers import make_password
-from .models import User, Book, Laptop, Product
+from .models import User, Book, Laptop, Product, ProductCounter, Cart
 import csv
 import json
 import math
@@ -13,13 +13,21 @@ import random
 
 def index(request):
     try:
+        user = User.objects.get(
+            username = request.session['user']
+        )
+        user_first_name = user.first_name
+
         context = {
             'user': request.session['user'],
+            'cart_count': request.session['cart_product_count'],
+            'user_first_name': user_first_name,
             'current_page': 'index',
         }
     except KeyError:
         context = {
             'user': '',
+            'cart_count': request.session['cart_product_count'],
             'current_page': 'index',
         }
 
@@ -30,8 +38,12 @@ def register(request):
     if request.method == "GET":
         context = {
             'user': '',
+            'cart_count': request.session['cart_product_count'],
             'current_page': 'login/register'
         }
+
+        
+
         return render(request, 'register.html', context=context)
 
     if request.method == "POST":
@@ -51,6 +63,52 @@ def register(request):
 
         new_user.save()
 
+        # Create a new cart for the user
+        new_cart = Cart(
+            user = new_user
+        )
+        new_cart.save()
+        # Add all the products in the temporary cart to the permanent cart, if there are any
+        try:
+            all_products_ids = request.session['temp_product_cart']
+            iterated_ids = []
+            for id in all_products_ids:
+                # get the product from the db
+                product = Product.objects.get(
+                        id = id
+                    )
+
+                # if product already exists in cart, increment the cart counter
+                if id in iterated_ids:
+                    product_counter = ProductCounter.objects.get(
+                        cart = new_cart,
+                        product = product
+                    )
+                    product_counter.product_count = product_counter.product_count + 1
+                    product_counter.save()
+
+                # if product does not exist
+                else:
+                    new_cart.products.add(product)
+
+                    # add the product id to the list of iterated id's
+                    iterated_ids.append(id)
+
+                    # create a counter for the new product
+                    new_counter = ProductCounter(
+                        cart = new_cart,
+                        product = product,
+                        product_count = 1
+                    )
+                    new_counter.save()
+
+            # once finished, delete the temporary cart
+            del request.session['temp_product_cart']
+        except KeyError:
+            pass
+
+        
+
         # Log the user in once he is registered
         request.session["user"] = username
         return HttpResponseRedirect("/")
@@ -60,6 +118,7 @@ def login(request):
     if request.method == "GET":
         context = {
             'user': '',
+            'cart_count': request.session['cart_product_count'],
             'current_page': 'login/register'
         }
         return render(request, 'login.html', context=context)
@@ -75,6 +134,7 @@ def login(request):
         if len(user_query_set) == 0:
             context = {
                 'user': '',
+                'cart_count': request.session['cart_product_count'],
                 'error': '* Email or password incorrect',
                 'current_page': 'login/register'
             }
@@ -109,6 +169,7 @@ def book_section(request):
     try:
         context = {
             'user': request.session['user'],
+            'cart_count': request.session['cart_product_count'],
             'current_page': 'book-section',
             'books': Book.objects.all()
         }
@@ -116,6 +177,7 @@ def book_section(request):
     except KeyError:
         context = {
             'user': '',
+            'cart_count': request.session['cart_product_count'],
             'current_page': 'book-section',
             'books': Book.objects.all()
         }
@@ -162,6 +224,7 @@ def electronics_section(request):
         try:
             context = {
             'user': request.session['user'],
+            'cart_count': request.session['cart_product_count'],
             'current_page': 'electronics-section',
             'laptops': Laptop.objects.all()
         }
@@ -169,6 +232,7 @@ def electronics_section(request):
         except:
             context = {
             'user': '',
+            'cart_count': request.session['cart_product_count'],
             'current_page': 'electronics-section',
             'laptops': Laptop.objects.all()
         }
@@ -194,7 +258,6 @@ def electronics_product_page(request):
                 container = container.replace('\r', '')
                 key = container.split("\t")[0]
                 value = container.split("\t")[1]
-                print(key + ":" + value)
                 technical_details_formatted[key] = value
                 container = ""
                 continue
@@ -204,6 +267,7 @@ def electronics_product_page(request):
         try:
             context = {
                 'user': request.session['user'],
+                'cart_count': request.session['cart_product_count'],
                 'current_page' : "electronics-product-page",
                 'product' : product,
                 'technical_details': technical_details_formatted
@@ -212,6 +276,7 @@ def electronics_product_page(request):
         except KeyError:
             context = {
                 'user': '',
+                'cart_count': request.session['cart_product_count'],
                 'current_page' : "electronics-product-page",
                 'product' : product,
                 'technical_details': technical_details_formatted
@@ -232,6 +297,7 @@ def book_product_page(request):
         try:
             context = {
                 'user': request.session['user'],
+                'cart_count': request.session['cart_product_count'],
                 'current_page' : "book-product-page",
                 'book' : book
             }
@@ -239,6 +305,7 @@ def book_product_page(request):
         except KeyError:
             context = {
                 'user': '',
+                'cart_count': request.session['cart_product_count'],
                 'current_page' : "book-product-page",
                 'book' : book
             }
@@ -247,16 +314,11 @@ def book_product_page(request):
         return render(request, "book-product-page.html", context=context)
 
 def delete_duplicates(reqeust):
-    all_books = Book.objects.all()
+    duplicate_books = Book.objects.filter(
+        isbn = "Flowing text, Google-generated PDF"
+    )
 
-    for book in all_books:
-        random_price = random.randint(5, 20)
-        random_price = random_price - 0.01
-        random_price = "$" + str(random_price)
-
-        book.price = random_price
-        book.save()
-        print(random_price)
+    duplicate_books.delete()
 
             
     return HttpResponseRedirect("/")
@@ -277,8 +339,207 @@ def update_product_database(request):
             price = laptop.price,
             type = "Laptop",
             average_rating = laptop.average_rating,
-            review_count = laptop.review_count
-        
+            review_count = laptop.review_count,
+            generic_image_path = laptop.generic_image_path,
+            product_image_path = laptop.product_image_path
+        )
+        laptop_product.save()
+
+    for book in all_books: 
+        book_product = Product(
+            name = book.name,
+            price = book.price,
+            type = "Book",
+            average_rating = book.average_rating,
+            review_count = book.review_count,
+            generic_image_path = book.generic_image_path,
+            product_image_path = book.product_image_path
         )
 
+        book_product.save()
+
     return HttpResponseRedirect("/")
+
+def search_results(request):
+    if request.method == "POST":
+        search_text = request.POST.get('search-text')
+
+        search_results_laptops_name = Laptop.objects.filter(name__contains=search_text)
+        search_results_books_name = Book.objects.filter(name__contains=search_text)
+        search_results_books_author = Book.objects.filter(author__contains=search_text)
+
+       
+
+        try:
+            context = {
+                'user': request.session['user'],
+                'cart_count': request.session['cart_product_count'],
+                'current_page' : "search-results",
+                'search_results_laptops_name': search_results_laptops_name,
+                'search_results_books_name': search_results_books_name,
+                'search_results_books_author': search_results_books_author
+            }
+
+        except KeyError:
+            context = {
+                'user': '',
+                'cart_count': request.session['cart_product_count'],
+                'current_page' : "search-results",
+                'search_results_laptops_name': search_results_laptops_name,
+                'search_results_books_name': search_results_books_name,
+                'search_results_books_author': search_results_books_author
+            }
+        return render(request, "search-results.html", context=context)
+
+
+def add_to_cart(request):
+    product_name = request.POST.get('product_name')
+    product_type = request.POST.get('product_type')
+    # get the product from the database
+    product = Product.objects.get(
+        name = product_name
+    )
+    
+
+    # if its an existing user, get his cart and add the item to it
+    try:
+        user_object = User.objects.get(
+            username = request.session['user']
+        )
+        user_cart = Cart.objects.get(
+            user = user_object
+        )
+        user_cart.products.add(product)
+        # check if a counter already exists for this product in this cart
+        try:
+            existing_counter = ProductCounter.objects.get(
+                cart = user_cart,
+                product = product
+            )
+            # if it exists, increment the amount by one
+
+            existing_counter.product_count = existing_counter.product_count + 1
+            existing_counter.save()
+        except:
+            # if an existing counter is not a found, create a counter for the product
+            new_counter = ProductCounter(
+                cart = user_cart,
+                product = product,
+                product_count = 1
+            )
+            new_counter.save()
+
+    # if its not an existing user, add the products id to his request.session['temp_product_cart']
+    except:
+        # if its not his first product, add it to the existing dictionary
+        try:
+            request.session['temp_product_cart'].append(product.id)
+            request.session.modified = True
+        except KeyError:
+            request.session['temp_product_cart'] = []
+            request.session['temp_product_cart'].append(product.id)
+
+    return HttpResponse('')
+
+def cart_page(request):
+    # If user has his own cart, get it
+    try:
+        user = User.objects.get(
+            username = request.session['user']
+        )
+        cart_object = Cart.objects.get(
+            user = user
+        )
+        all_products = []
+
+        # arrange all the products inside a list
+        for product in cart_object.products.all():
+            # get the product count of the product
+            product_counter = ProductCounter.objects.get(
+                cart = cart_object,
+                product = product
+            )
+
+            # create a new counter field for the product
+            product.amount = product_counter.product_count
+            all_products.append(product)
+
+        context = {
+            'user': request.session['user'],
+            'cart_count': request.session['cart_product_count'],
+            'current_page' : "cart-page",
+            'cart': all_products
+        }
+
+
+    # If user does not have his own cart, get his temporary cart from request.session
+    except KeyError:
+        # see if user has a  temporary cart
+        try:
+            all_products = []
+            iterated_ids = []
+            temp_product_id_list = request.session['temp_product_cart']
+            for id in temp_product_id_list:
+                # if product was already iterated, continue to next iteration
+                if id in iterated_ids:
+                    continue
+
+                # get the product from the database
+                new_product = Product.objects.get(
+                        id = id
+                    )
+                
+                # see how many times the product id appears in the temp_product_id_list
+                repeats = 0
+                for element in temp_product_id_list:
+                    if element == id:
+                        repeats = repeats + 1
+                # add the number of repeats to his request.session
+                try:
+                    # if he has an existing product_amount counter, append to it
+                    request.session['product_amount'].append(repeats)
+                    request.session.modified = True
+
+                except:
+                    # if he doesnt have an existing product_amount counter, create it and append to it
+
+                    request.session['product_amount'] = []
+                    request.session['product_amount'].append(repeats)
+                    request.session.modified = True
+
+                # add each product in his temp cart
+                all_products.append(new_product)
+                # add the product id to the iterated id's list
+                iterated_ids.append(id)
+
+            
+            # associate each product with his own counter
+            for index, product in enumerate(all_products):
+                product.amount = request.session['product_amount'][index]
+
+
+            # delete the request.session['product_amount] so as to not cause future error 
+            del request.session['product_amount']
+            context = {
+                'user': '',
+                'current_page' : "cart-page",
+                'cart': all_products,
+            }
+
+            
+        # if he doesnt have a cart
+        except KeyError:
+            context = {
+                'user': '',
+                'cart_count': request.session['cart_product_count'],
+                'current_page' : "cart-page"
+            }
+    return render(request, "cart-page.html", context=context)
+
+def checkout(request):
+    # if its a registered user, checkout
+    if 'user' in request.session:
+        return HttpResponse('working on it')
+    # if its not an existing user, redirect him to the register page
+    else:
+        return HttpResponseRedirect('/register')

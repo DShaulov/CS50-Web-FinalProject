@@ -14,5 +14,10 @@ urlpatterns = [
     path('electronics-product-page', views.electronics_product_page, name="electronics-product-page"),
     path('book-product-page', views.book_product_page, name="book-product-page"),
     path('delete-duplicates', views.delete_duplicates, name="delete-duplicates"),
-    path('update-product-database', views.update_product_database, name="update-product-database")
+    path('update-product-database', views.update_product_database, name="update-product-database"),
+    path('search-results', views.search_results, name="search-results"),
+    path('cart-page', views.cart_page, name="cart-page"),
+    path('add-to-cart', views.add_to_cart, name="add-to-cart"),
+    path('checkout', views.checkout, name="checkout")
+
 ]

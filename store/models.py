@@ -25,12 +25,13 @@ class Book(models.Model):
     genre = models.CharField(max_length=64)
     language = models.CharField(max_length=64)
     generic_image_path = models.CharField(max_length=64)
+    product_image_path = models.CharField(max_length=64, default="")
     review_count = models.CharField(max_length=64, default=0)
     average_rating = models.CharField(max_length=64, default=0)
     top_seller = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.name}, {self.isbn}"
 
 class Electronic(models.Model):
     name = models.CharField(max_length=256)
@@ -63,5 +64,17 @@ class Product(models.Model):
 
     def __str__(self):
         return f"{self.name}, {self.type}"
+
+class Cart(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
+    products = models.ManyToManyField(Product)
+    
+class ProductCounter(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, blank=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, blank=True)
+    product_count = models.IntegerField(default=1)
+
+
+        
     
     
