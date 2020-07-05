@@ -235,7 +235,6 @@ a {
 
 .promotion-div {
     text-align: center;
-    background-color: lightcoral;
 }
 
 .store-main-image-woman {
@@ -342,4 +341,9 @@ a {
 
 .checkout-link {
     @extend .my-links;
+}
+
+.site-banner {
+    height: 30%;
+    width: 30%;
 }

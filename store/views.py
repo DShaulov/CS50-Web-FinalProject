@@ -12,6 +12,24 @@ import random
 
 
 def index(request):
+    # pick 2 product categories at random and get random objects from the database to display on the frontpage
+    for index in range(2):
+        all_categories = ['Laptop', 'Book']
+        category = all_categories[random.randint(0, len(all_categories) - 1)]
+        random_products = []
+        
+        if category == 'Laptop':
+            total_amount = Laptop.objects.all().count()
+            for index_2 in range(5):
+                print(total_amount)
+
+        if category == 'Book':
+            total_amount = Book.objects.all().count()
+            for index_2 in range(5):
+                print(total_amount)
+
+    
+    
     try:
         user = User.objects.get(
             username = request.session['user']
@@ -31,6 +49,7 @@ def index(request):
             'current_page': 'index',
         }
 
+    
     return render(request, 'index.html', context=context)
 
 

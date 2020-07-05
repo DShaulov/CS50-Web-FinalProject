@@ -204,7 +204,6 @@ body, html {
 
 .promotion-div {
   text-align: center;
-  background-color: lightcoral;
 }
 
 .store-main-image-woman {
@@ -303,6 +302,11 @@ body, html {
 
 .counter {
   color: #FFFF33;
+}
+
+.site-banner {
+  height: 30%;
+  width: 30%;
 }
 
 /*# sourceMappingURL=styles.css.map */
